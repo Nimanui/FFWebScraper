@@ -1,5 +1,5 @@
 # FFWebScraper
-Web scraper architected around scraping data from historic iterations of FanFiction.Net through the wayback machine internet archive
+Web scraper architected around scraping data from historic iterations of FanFiction.Net through the Wayback Machine internet archive
 
 Various references used to build this repository:
 
