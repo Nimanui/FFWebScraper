@@ -18,10 +18,11 @@ import re
 pageNumber = "20010516200302"
 month = "May"
 year = "2001"
+folder = "Raw2ndScrape073022/"
 
 found = False
 def findPage(baseURL, bigCategory):
-    urlMidList = ["master.cfm?action=story-categories&categoryID="]
+    urlMidList = [""]
     # , "cat/", "subcats.php?categoryid=", "index.fic?action=story-categories&categoryID="]
     for urlMid in urlMidList:
         r = requests.get(baseURL + urlMid + str(bigCategory))
@@ -41,16 +42,18 @@ def scrapeFFNetOld(baseURL, pageNumber, bigCategoryList):
                if(number.search(font.text) != None):
                   categoriesList.append({"text": font.text})
 
+                  filename = folder + "FFArchive" + str(pageNumber) + "#" + i.replace("/", "") + ".csv"
+                  with open(filename, 'wb') as f:
+                      w = csv.DictWriter(f, ['text'], encoding='utf-8-sig')
+                      w.writeheader()
+
+                      w.writerows(categoriesList)
+
             # for font in soup.find_all('td'):
             #     if(number.search(font.text) != None):
             #         categoriesList.append({"text": font.text})
 
-    filename = "FFArchive" + str(pageNumber) + ".csv"
-    with open(filename, 'wb') as f:
-        w = csv.DictWriter(f, ['text'],encoding='utf-8-sig')
-        w.writeheader()
 
-        w.writerows(categoriesList)
 
 
 monthList = ["01","02","03","04","05","06","07","08","09","10","11","12"]
@@ -63,14 +66,14 @@ bigCategoryList2 = ["anime/","book/","cartoon/",
                    "crossovers/comic/","crossovers/game/","crossovers/misc/",
                    "crossovers/movie/","crossovers/play/","crossovers/tv/"]
 
-for y in range(2000,2001):
+for y in range(2022,2023):
     for m in monthList:
         pageNumber = str(y) + m + "00000000"
         r = requests.get("https://web.archive.org/web/" + pageNumber + "/http://fanfiction.net/")
         if r.status_code == 200:
             found = True
             print(pageNumber)
-            scrapeFFNetOld(r.url, pageNumber, bigCategoryList1)
+            scrapeFFNetOld(r.url, pageNumber, bigCategoryList2)
 
 # s = soup.find_all('table')
 # s2 = soup.find('table')
