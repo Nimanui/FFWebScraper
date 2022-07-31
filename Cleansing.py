@@ -1,16 +1,21 @@
 import unicodecsv as csv
 import re
 
+def removeKDecimal(matchedObject):
+    return matchedObject.group(1) + matchedObject.group(3) + "00"
+
 def removeK(matchedObject):
-    return matchedObject.group(1) + matchedObject.group(3) + "000"
+    return matchedObject.group(1) + "000"
 
 def cleanseRow(row):
-    thousands = re.compile('([0-9]+)([.]*)([0-9])K')
+    thousandsDecimal = re.compile('([0-9]+)([.]+)([0-9])K')
+    thousands = re.compile('([0-9]+)K')
     newRow = []
     for item in row:
         item = item.replace("[\'", "")
         item = item.replace("[\"", "")
         item = item.replace("\\xa0", "")
+        item = re.sub(thousandsDecimal, removeKDecimal, item)
         item = re.sub(thousands, removeK, item)
         newRow.append(item)
     return newRow

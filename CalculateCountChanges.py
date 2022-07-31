@@ -75,5 +75,10 @@ def calculateAllVelocitiesRaw(inputFile):
 
 
 
-calculateAllVelocities("FFArchiveHarryPotter")
-calculateAllVelocitiesRaw("FFArchiveHarryPotter")
+# calculateAllVelocities("FFArchiveHarryPotter")
+# calculateAllVelocitiesRaw("FFArchiveHarryPotter")
+fandoms = ["Supernatural", "Avatar: Last Airbender", "Naruto", "Wrestling", "Twilight", "Star Wars", "Pokémon", "Pokemon", "NCIS", "Harry Potter", "My Little Pony"]
+fandomFiles = ["FFArchiveNaruto_cleaned", "FFArchivePokémon_cleaned", "FFArchiveWrestling_cleaned", "FFArchiveMyLittlePony_cleaned"]
+
+for fandom in fandomFiles:
+    calculateAllVelocities(fandom)

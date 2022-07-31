@@ -13,4 +13,6 @@ def extractFandom(inputFile, fandom):
                         w.writerow(row)
 
 
-extractFandom("FFArchiveMerged_cleansed", "Harry Potter")
+fandoms = ["Supernatural", "Avatar: Last Airbender", "Naruto", "Wrestling", "Twilight", "Star Wars", "Pokémon", "Pokemon", "NCIS", "Harry Potter", "My Little Pony"]
+for fandom in fandoms:
+    extractFandom("FFArchiveMerged_cleansed", fandom)
